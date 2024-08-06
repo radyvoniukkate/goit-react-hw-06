@@ -1,10 +1,11 @@
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { deleteContact } from "/src/redux/contactsSlice.js";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteContact, selectContacts } from "/src/redux/contactsSlice.js";
 import Contact from "../Contact/Contact";
 
-const ContactList = ({ contacts }) => {
+
+const ContactList = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts); 
 
   return (
     <ul className="list">
@@ -17,16 +18,6 @@ const ContactList = ({ contacts }) => {
       ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };
 
 export default ContactList;
