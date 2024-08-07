@@ -1,28 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import { changeFilter } from "/src/redux/filtersSlice.js";
-import { selectNameFilter } from "/src/redux/filtersSlice.js";
-import "./SearchBox.module.css";
+import PropTypes from "prop-types";
+import styles from "./SearchBox.module.css";
 
-const SearchBox = () => {
-  const dispatch = useDispatch();
-  const filter = useSelector(selectNameFilter);
-
-  const handleFilterChange = (event) => {
-    dispatch(changeFilter(event.target.value));
-  };
-
+const SearchBox = ({ searchTerm, onSearchChange }) => {
   return (
-    <div className="search-box">
-      <label htmlFor="searchField">Find contacts by name</label>
+    <div className={styles.box}>
+      <label htmlFor="inputSearch">Find contacts by name</label>
       <input
         type="text"
-        id="searchField"
-        value={filter}
-        onChange={handleFilterChange}
-        className="input"
+        value={searchTerm}
+        onChange={onSearchChange}
+        className={styles.input}
+        id="inputSearch"
       />
     </div>
   );
+};
+
+SearchBox.propTypes = {
+  searchTerm: PropTypes.string.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
 };
 
 export default SearchBox;

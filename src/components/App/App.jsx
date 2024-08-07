@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
 import SearchBox from "../SearchBox/SearchBox";
-import { addContact, selectContacts } from "/src/redux/contactsSlice.js";
+import {  selectContacts } from "/src/redux/contactsSlice.js";
 import { selectNameFilter, changeFilter } from "/src/redux/filtersSlice.js";
 
 const App = () => {
@@ -10,11 +10,7 @@ const App = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectNameFilter);
 
-  const handleAddContact = (newContact) => {
-    dispatch(addContact(newContact));
-  };
-
-  const handleFilterChange = (event) => {
+  const handleSearchChange = (event) => {
     dispatch(changeFilter(event.target.value));
   };
 
@@ -25,12 +21,14 @@ const App = () => {
     );
   };
 
+  const filteredContacts = getFilteredContacts();
+
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm onAddContact={handleAddContact} />
-      <SearchBox searchTerm={filter} onSearchChange={handleFilterChange} />
-      <ContactList contacts={getFilteredContacts()} />
+      <ContactForm />
+      <SearchBox searchTerm={filter} onSearchChange={handleSearchChange} />
+      <ContactList contacts={filteredContacts} />
     </div>
   );
 };

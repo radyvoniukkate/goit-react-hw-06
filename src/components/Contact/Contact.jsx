@@ -3,11 +3,8 @@ import {  useDispatch } from "react-redux";
 import { deleteContact } from "/src/redux/contactsSlice.js";
 
 const Contact = ({ contact }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleDelete = () => {
-      dispatch(deleteContact(contact.id));
-    };
   return (
     <li className="contact-item">
       <div className="contact-info">
@@ -26,7 +23,7 @@ const Contact = ({ contact }) => {
       </div>
       <button
         className="delete-button"
-        onClick={handleDelete}
+        onClick={() => dispatch(deleteContact(contact.id))}
       >
         Delete
       </button>
@@ -40,7 +37,6 @@ Contact.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
   }).isRequired,
-  onDeleteContact: PropTypes.func.isRequired,
 };
 
 export default Contact;
